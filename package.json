@@ -21,6 +21,8 @@
     "prepare": "husky"
   },
   "dependencies": {
+    "@digitalbazaar/ed25519-verification-key-2020": "^4.2.0",
+    "@digitaltg/cipher-cb": "^1.0.0",
     "@nestjs/common": "^10.0.0",
     "@nestjs/config": "^4.0.0",
     "@nestjs/core": "^10.0.0",
