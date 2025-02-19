@@ -1,0 +1,21 @@
+{
+  "moduleFileExtensions": [
+    "js",
+    "json",
+    "ts"
+  ],
+  "rootDir": ".",
+  "testEnvironment": "node",
+  "testRegex": ".e2e-spec.ts$",
+  "transform": {
+    "^.+\\.(t|j)s$": "ts-jest"
+  },
+  "moduleNameMapper": {
+    "@app/core-app/(.*)": "<rootDir>/../libs/core-app/src/$1",
+    "@app/core-app": "<rootDir>/../libs/core-app/src",
+    "@app/prof/(.*)": "<rootDir>/../libs/prof/src/$1",
+    "@app/prof": "<rootDir>/../libs/prof/src",
+    "@app/notification/(.*)": "<rootDir>/../libs/notification/src/$1",
+    "@app/notification": "<rootDir>/../libs/notification/src"
+  }
+}
