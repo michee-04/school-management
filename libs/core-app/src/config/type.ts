@@ -1,10 +1,21 @@
-export interface AppConfig {
-  NODE_ENV: string;
-
-  //APP
-  APP_NAME: string;
-  APP_PORT: number;
-
-  //   Database
-  GLOBAL_MAIN_DATABASE_URI: string;
+export enum Environment {
+  Development = 'development',
+  Staging = 'staging',
+  Production = 'production',
 }
+
+export enum MailerClient {
+  Mailtrap = 'mailtrap',
+  Mailhog = 'mailhog',
+  Sendgrid = 'sendgrid',
+}
+
+export type LogLevel = 'info' | 'warn' | 'error';
+
+export type Logger = { log: LogFunc };
+
+export type LogFunc = (
+  level: LogLevel,
+  message: string,
+  data?: Record<string, any>,
+) => void;

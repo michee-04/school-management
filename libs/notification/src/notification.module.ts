@@ -1,8 +1,9 @@
 import { Module } from '@nestjs/common';
-import { NotificationService } from './notification.service';
+import { LibNotificationDomainModule } from './domain/domain.module';
+import { LibNotificationInfrastructureModule } from './infrastructure/infrastructure.module';
 
 @Module({
-  providers: [NotificationService],
-  exports: [NotificationService],
+  imports: [LibNotificationDomainModule, LibNotificationInfrastructureModule],
+  exports: [LibNotificationDomainModule, LibNotificationInfrastructureModule],
 })
-export class NotificationModule {}
+export class LibNotificationModule {}
