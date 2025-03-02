@@ -35,6 +35,10 @@ export class AppConfig {
   @IsNotEmpty()
   GLOBAL_JOURNAL_DATABASE_URI: string;
 
+  // ================================= LANGUAGE APP
+  @IsNotEmpty()
+  LANG: string;
+
   // ================================= API APP
   @IsInt()
   @Min(0)
@@ -45,6 +49,10 @@ export class AppConfig {
 
   // ================================= LIBRAIRIES
   // ------------- User Access Control
+  @IsString()
+  @IsOptional()
+  LIB_USER_ACCESS_CONTROL_WHITELIST_EMAILS: string;
+
   @IsBoolean()
   @IsOptional()
   @Transform(({ value }) => value === 'true')
