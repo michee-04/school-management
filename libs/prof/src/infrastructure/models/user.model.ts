@@ -8,11 +8,8 @@ import mongoose, { Document, HydratedDocument } from 'mongoose';
 export class User extends Document {
   _id: mongoose.Schema.Types.ObjectId;
 
-  @Prop({ type: String, required: true })
-  firstname: string;
-
-  @Prop({ type: String, required: true })
-  lastname: string;
+  @Prop({ type: String, required: true, unique: true })
+  name: string;
 
   @Prop({ type: String, required: true })
   gender: string;

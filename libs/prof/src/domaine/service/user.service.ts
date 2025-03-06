@@ -4,10 +4,12 @@ import { ConfigService } from '@nestjs/config';
 
 import { ErrorResult, validatePassword } from '@app/common/utils';
 import { AppConfig } from '@app/core-app/config';
+import { LeanedDocument } from '@app/core-app/providers/base.mongo.repository';
 import { PasswordService } from '@app/core-app/services/password.service';
 import { NotifyService } from '@app/notification/infrastructure/services/notify.service';
 import { User } from '@app/prof/infrastructure/models/user.model';
 import { UserRepository } from '@app/prof/infrastructure/repository/user.repository';
+import { Attachment } from 'nodemailer/lib/mailer';
 
 type CreateUserOptions = Record<string, any> & { isAdmin?: boolean };
 
@@ -71,9 +73,16 @@ export class UserService {
       });
     }
 
+    const lang = process.env.LANG || 'fr';
+    const payload = {
+      lang,
+      isFr: lang === 'fr',
+      // immigrationNum: recordId,
+      // docUrl,
+    };
+
     const userDto: Partial<User> = {};
-    userDto.firstname = input.firstname!;
-    userDto.lastname = input.lastname!;
+    userDto.name = input.name!;
     userDto.gender = input.gender!;
     userDto.email = input.email!;
     userDto.phone = input.phone!;
@@ -86,7 +95,30 @@ export class UserService {
     userDto.password = hashedPassword;
 
     const user = await this.userRepository.create(userDto);
-    return user;
+
+    const docUrl: string | false = false;
+
+    const application: LeanedDocument<User> | null = null;
+
+    if (userDto.email && userDto.email !== 'N/A') {
+      let attachments: Attachment[] | undefined = undefined;
+      if (docUrl) {
+        attachments = [{ filename: application!.name, path: docUrl }];
+      }
+
+      await this.notifyService
+        .notifyByEmail(
+          'mail-activation-compte',
+          payload,
+          userDto.email,
+          user._id.toString(),
+          attachments,
+        )
+        .catch(() => {});
+      // console.log('💕💕💕💕 : ', test);
+
+      return user;
+    }
   }
 
   // async updateProfile(userId: string, input: Partial<User>, lang = 'fr') {

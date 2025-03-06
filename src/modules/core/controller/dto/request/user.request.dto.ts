@@ -5,12 +5,7 @@ export class CreateUserRequestDto {
   @IsString()
   @IsNotEmpty()
   @ApiProperty()
-  firstname: string;
-
-  @IsString()
-  @IsNotEmpty()
-  @ApiProperty()
-  lastname: string;
+  name: string;
 
   @IsString()
   @IsNotEmpty()

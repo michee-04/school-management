@@ -70,9 +70,13 @@ export class MailService {
   }
 
   async send(mailOptions: Omit<SendMailOptions, 'from'>) {
+    // console.log('🔜🔜🔜🔜🔜', mailOptions);
+
     await this.activeClient.transport.sendMail({
       ...mailOptions,
       from: this.activeClient.from,
     });
+
+    // console.log('😒😒😒😒 : ,', test);
   }
 }

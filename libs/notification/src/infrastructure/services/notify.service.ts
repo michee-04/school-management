@@ -34,6 +34,7 @@ export class NotifyService {
     if (!this.isEmailEnabled) return null;
 
     const template = await this.emailTemplateRepository.getActiveBySlug(slug);
+
     if (!template) return null;
 
     let subject = this.appName;

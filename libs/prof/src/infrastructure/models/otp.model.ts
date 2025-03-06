@@ -14,6 +14,9 @@ export class Otp extends Document {
   @Prop({ type: String, required: true, index: true })
   email: string;
 
+  @Prop({ type: String })
+  phone?: string;
+
   @Prop({ type: String, required: true })
   token: string;
 
